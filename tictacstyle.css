@@ -1,0 +1,9 @@
+.symbol-box{
+    display: flex;
+    width: 30px;
+    height: 30px;
+    border-style: solid;
+    border-width: 2px;
+    align-content: center;
+    text-align: center;
+}
