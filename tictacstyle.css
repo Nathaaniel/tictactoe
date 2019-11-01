@@ -1,9 +1,25 @@
-.symbol-box{
-    display: flex;
-    width: 30px;
-    height: 30px;
-    border-style: solid;
-    border-width: 2px;
-    align-content: center;
-    text-align: center;
+.symbol-box {
+  border-style: solid;
+  border-width: 1px;
+  text-align: center;
+  font-size: 150px;
+  line-height: 200px;
+  width: 200px;
+  height: 200px;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 1px;
+}
+
+.tictacbox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 612px;
+  border-width: 2px;
+  border-style: solid;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
 }
