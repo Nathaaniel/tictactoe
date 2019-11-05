@@ -5,13 +5,28 @@
   </head>
   <body>
     <h1>TIC to the TAC to the TOE!</h1>
-    <div id="player1" class="player"> </div>
-    <div id="player2" class="player"> </div>
-    <form id="names" onsubmit="return gameFncs.newGame()" action="JavaScript:void(0)">
-      Player 1: <input type="text" name="player1" /><br />
-      Player 2: <input type="text" name="player2" /><br />
-      <input type="submit" value="New Game" />
-    </form>
+    <div class="top">
+      <div class="one">
+        <div id="player1" class="player"></div>
+        <div  class="symbol">X</div>
+      </div>
+
+      <form
+        id="names"
+        class="centered"
+        ;
+        onsubmit="return gameFncs.newGame()"
+        action="JavaScript:void(0)"
+      >
+        Player 1: <input type="text" name="player1" /><br />
+        Player 2: <input type="text" name="player2" /><br />
+        <input type="submit" value="New Game" />
+      </form>
+      <div class="two">
+        <div id="player2" class="player"></div>
+        <div class="symbol">O</div>
+      </div>
+    </div>
     <div id="tictacbox" , class="tictacbox"></div>
     <script src="tictacscript.js"></script>
   </body>

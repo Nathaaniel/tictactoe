@@ -11,7 +11,7 @@ const gameFncs = (() => {
 
     currentPlayer = player1;
 
-    draw();
+    drawIt();
   };
 
   const newGame = () => {
@@ -19,16 +19,21 @@ const gameFncs = (() => {
     player1 = personFactory(x.player1.value, "X");
     player2 = personFactory(x.player2.value, "O");
     reset();
-    var left = document.getElementById("player1")
-    var right = document.getElementById("player2")
-    var leftText = document.createTextNode(player1.name)
-    var rightText = document.createTextNode(player2.name)
-    left.appendChild(leftText)
-    right.appendChild(rightText)
-
+    var left = document.getElementById("player1");
+    var right = document.getElementById("player2");
+    while (left.firstChild) {
+      left.removeChild(left.firstChild);
+    }
+    while (right.firstChild) {
+      right.removeChild(right.firstChild);
+    }
+    var leftText = document.createTextNode(player1.name);
+    var rightText = document.createTextNode(player2.name);
+    left.appendChild(leftText);
+    right.appendChild(rightText);
   };
 
-  const draw = () => {
+  const drawIt = () => {
     container = document.getElementById("tictacbox");
     while (container.firstChild) {
       container.removeChild(container.firstChild);
@@ -71,6 +76,16 @@ const gameFncs = (() => {
     ].forEach(function(args) {
       gameFncs.positionCheck.apply(null, args);
     });
+    boardValues = Object.values(gameBoard);
+    if (!boardValues.includes("")) {
+      gameFncs.finished = true;
+      drawingMessage = document.querySelector(".one");
+      drawText = document.createTextNode("It's a draw!");
+      drawingMessage.appendChild(drawText);
+      drawingMessage = document.querySelector(".two");
+      drawText = document.createTextNode("It's a draw!");
+      drawingMessage.appendChild(drawText);
+    }
   };
 
   const positionCheck = (one, two, three) => {
@@ -87,6 +102,17 @@ const gameFncs = (() => {
       box1.style.color = "red";
       box2.style.color = "red";
       box3.style.color = "red";
+      console.log(gameFncs.winner + " wins!");
+      if (currentPlayer === player1) {
+        side = ".one";
+      } else {
+        side = ".two";
+      }
+      winningMessage = document.querySelector(side);
+      winningText = document.createTextNode(
+        "It's a win for " + gameFncs.winner
+      );
+      winningMessage.appendChild(winningText);
     }
   };
 
@@ -120,7 +146,7 @@ function playerTurn(marker, id) {
     gameBoard[id] = marker;
     symbol = document.createTextNode(marker);
     box.appendChild(symbol);
-    gameFncs.switchPlayer();
     gameFncs.checkWin();
+    gameFncs.switchPlayer();
   }
 }
