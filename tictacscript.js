@@ -14,6 +14,20 @@ const gameFncs = (() => {
     draw();
   };
 
+  const newGame = () => {
+    var x = document.getElementById("names").elements;
+    player1 = personFactory(x.player1.value, "X");
+    player2 = personFactory(x.player2.value, "O");
+    reset();
+    var left = document.getElementById("player1")
+    var right = document.getElementById("player2")
+    var leftText = document.createTextNode(player1.name)
+    var rightText = document.createTextNode(player2.name)
+    left.appendChild(leftText)
+    right.appendChild(rightText)
+
+  };
+
   const draw = () => {
     container = document.getElementById("tictacbox");
     while (container.firstChild) {
@@ -82,7 +96,8 @@ const gameFncs = (() => {
     finished,
     checkWin,
     positionCheck,
-    reset
+    reset,
+    newGame
   };
 })();
 
@@ -95,12 +110,6 @@ const personFactory = (name, marker) => {
 var player1 = personFactory("Player1", "X");
 var player2 = personFactory("Player2", "O");
 var currentPlayer = player1;
-
-function test() {
-  var x = document.getElementById("names").elements;
-  player1 = personFactory(x[0], "X");
-  player2 = personFactory(x[1], "O");
-}
 
 function playerTurn(marker, id) {
   box = document.getElementById(id);
