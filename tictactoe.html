@@ -5,7 +5,12 @@
   </head>
   <body>
     <h1>TIC to the TAC to the TOE!</h1>
-
+    <button type="button" onclick="gameFncs.reset()">New Game</button>
+    <form id="names" onsubmit="return test()">
+      Player 1: <input type="text" name="player1" /><br />
+      Player 2: <input type="text" name="player2" /><br />
+      <input type="submit" value="Submit" />
+    </form>
     <div id="tictacbox" , class="tictacbox"></div>
     <script src="tictacscript.js"></script>
   </body>
