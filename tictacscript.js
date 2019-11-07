@@ -49,6 +49,15 @@ const gameFncs = (() => {
       box.appendChild(symbol);
       container.appendChild(box);
     });
+
+    drawingMessage = document.getElementById("message-one");
+    while (drawingMessage.firstChild) {
+      drawingMessage.removeChild(drawingMessage.firstChild);
+    }
+    drawingMessage = document.getElementById("message-two");
+    while (drawingMessage.firstChild) {
+      drawingMessage.removeChild(drawingMessage.firstChild);
+    }
   };
 
   const switchPlayer = () => {
@@ -79,11 +88,12 @@ const gameFncs = (() => {
     boardValues = Object.values(gameBoard);
     if (!boardValues.includes("")) {
       gameFncs.finished = true;
-      drawingMessage = document.querySelector(".one");
+      drawingMessage = document.getElementById("message-one");
       drawText = document.createTextNode("It's a draw!");
       drawingMessage.appendChild(drawText);
-      drawingMessage = document.querySelector(".two");
+      drawingMessage = document.getElementById("message-two");
       drawText = document.createTextNode("It's a draw!");
+
       drawingMessage.appendChild(drawText);
     }
   };
@@ -104,14 +114,15 @@ const gameFncs = (() => {
       box3.style.color = "red";
       console.log(gameFncs.winner + " wins!");
       if (currentPlayer === player1) {
-        side = ".one";
+        side = "message-one";
       } else {
-        side = ".two";
+        side = "message-two";
       }
-      winningMessage = document.querySelector(side);
+      winningMessage = document.getElementById(side);
       winningText = document.createTextNode(
         "It's a win for " + gameFncs.winner
       );
+
       winningMessage.appendChild(winningText);
     }
   };

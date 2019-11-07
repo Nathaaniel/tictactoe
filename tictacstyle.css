@@ -1,3 +1,7 @@
+html{
+    background-color: rgb(223, 223, 223);
+}
+
 .symbol-box {
   border-style: solid;
   border-width: 1px;
@@ -8,6 +12,7 @@
   height: 200px;
   font-family: Arial, Helvetica, sans-serif;
   padding: 1px;
+  background-color: white;
 }
 
 .tictacbox {
