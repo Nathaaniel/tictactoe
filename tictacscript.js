@@ -2,7 +2,7 @@ var gameBoard = {};
 
 const gameFncs = (() => {
   const reset = () => {
-    ["a", "b", "c", "d", "e", "f", "g", "h", "i"].forEach(function(letter) {
+    startLetters.forEach(function(letter) {
       gameBoard[letter] = "";
     });
     gameFncs.winner = false;
@@ -13,6 +13,8 @@ const gameFncs = (() => {
 
     drawIt();
   };
+
+  const startLetters = ["a", "b", "c", "d", "e", "f", "g", "h", "i"];
 
   const newGame = () => {
     var x = document.getElementById("names").elements;
@@ -64,9 +66,18 @@ const gameFncs = (() => {
   const switchPlayer = () => {
     if (currentPlayer === player1) {
       currentPlayer = player2;
+      if (gameFncs.gameType === "one-player" && gameFncs.finished === false;) {
+        computerTurn();
+      }
     } else {
       currentPlayer = player1;
     }
+  };
+
+  const computerTurn = () => {
+    var available = Object.keys(gameBoard).filter(x => gameBoard[x] === "");
+    var randomBox = available[Math.floor(Math.random()*available.length)];
+    playerTurn(currentPlayer.marker, randomBox)
   };
 
   const playerSwitcher = () => {
