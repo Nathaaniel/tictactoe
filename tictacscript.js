@@ -18,6 +18,7 @@ const gameFncs = (() => {
     var x = document.getElementById("names").elements;
     player1 = personFactory(x.player1.value, "X");
     player2 = personFactory(x.player2.value, "O");
+    gameFncs.gameType = x.AIselector.value;
     reset();
     var left = document.getElementById("player1");
     var right = document.getElementById("player2");
@@ -68,21 +69,39 @@ const gameFncs = (() => {
     }
   };
 
+  const playerSwitcher = () => {
+    var twoPlayers = document.getElementById("two-player");
+    var playerTwoBox = document.getElementById("secondPlayer");
+    if (twoPlayers.checked == true) {
+      playerTwoBox.value = "";
+      playerTwoBox.removeAttribute("readonly");
+      playerTwoBox.style.backgroundColor = "white";
+    } else {
+      playerTwoBox.value = "Computer";
+      playerTwoBox.setAttribute("readonly", true);
+      playerTwoBox.style.backgroundColor = "rgb(155, 155, 155)";
+    }
+  };
+
   var winner = false;
 
   var finished = false;
 
+  var gameType = "";
+
+  var winningCombos = [
+    ["a", "b", "c"],
+    ["d", "e", "f"],
+    ["g", "h", "i"],
+    ["a", "d", "g"],
+    ["b", "e", "h"],
+    ["c", "f", "i"],
+    ["a", "e", "i"],
+    ["c", "e", "g"]
+  ];
+
   const checkWin = () => {
-    [
-      ["a", "b", "c"],
-      ["d", "e", "f"],
-      ["g", "h", "i"],
-      ["a", "d", "g"],
-      ["b", "e", "h"],
-      ["c", "f", "i"],
-      ["a", "e", "i"],
-      ["c", "e", "g"]
-    ].forEach(function(args) {
+    winningCombos.forEach(function(args) {
       gameFncs.positionCheck.apply(null, args);
     });
     boardValues = Object.values(gameBoard);
@@ -134,7 +153,9 @@ const gameFncs = (() => {
     checkWin,
     positionCheck,
     reset,
-    newGame
+    newGame,
+    playerSwitcher,
+    gameType
   };
 })();
 
