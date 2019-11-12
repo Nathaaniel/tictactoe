@@ -66,7 +66,7 @@ const gameFncs = (() => {
   const switchPlayer = () => {
     if (currentPlayer === player1) {
       currentPlayer = player2;
-      if (gameFncs.gameType === "one-player" && gameFncs.finished === false;) {
+      if (gameFncs.gameType === "one-player" && gameFncs.finished === false) {
         computerTurn();
       }
     } else {
@@ -75,10 +75,75 @@ const gameFncs = (() => {
   };
 
   const computerTurn = () => {
-    var available = Object.keys(gameBoard).filter(x => gameBoard[x] === "");
-    var randomBox = available[Math.floor(Math.random()*available.length)];
-    playerTurn(currentPlayer.marker, randomBox)
+    var winningKeyValueArrays = [];
+    var winningKeyValueObjects = [];
+    gameFncs.winningCombos.forEach(function(element) {
+      winningKeyValueArrays.push(objectify(element));
+    });
+    // winningKeyValueArrays.forEach(function(x) {
+    //   var temp = {};
+    //   temp[x[0][0]] = x[0][1];
+    //   temp[x[1][0]] = x[1][1];
+    //   temp[x[2][0]] = x[2][1];
+    //   winningKeyValueObjects.push(temp);
+    // });
+
+    console.log(winningKeyValueArrays);
+
+    if (gameFncs.checkTwoX(winningKeyValueArrays) !== "") {
+      playerTurn(
+        currentPlayer.marker,
+        gameFncs.checkTwoX(winningKeyValueArrays)
+      );
+    } else if (gameBoard["e"] === "") {
+      playerTurn(currentPlayer.marker, "e");
+    } else if (
+      gameBoard["e"] === "X" &&
+      !Object.values(gameBoard).includes("O")
+    ) {
+      var corners = ["a", "c", "g", "i"];
+      var cornerBox = corners[Math.floor(Math.random() * corners.length)];
+      playerTurn(currentPlayer.marker, cornerBox);
+    } else {
+      playerTurn(currentPlayer.marker, gameFncs.randomTurn());
+    }
   };
+
+  const objectify = array => {
+    return array.map(x => [x, gameBoard[x]]);
+  };
+
+  const checkTwoX = array => {
+    var turn = "";
+    array.forEach(function(x) {
+      var twoXs = x.filter(checkX);
+      var blank = x.filter(checkBlank);
+
+      if ((twoXs.length === 2) & (blank.length === 1)) {
+        // playerTurn(currentPlayer.marker, blank[0]);
+        turn = blank[0][0];
+      }
+    });
+    return turn;
+  };
+
+  const randomTurn = () => {
+    var available = Object.keys(gameBoard).filter(x => gameBoard[x] === "");
+    var randomBox = available[Math.floor(Math.random() * available.length)];
+    return randomBox;
+  };
+
+  function checkX(element) {
+    return element[1] == "X";
+  }
+
+  function checkBlank(element) {
+    return element[1] == "";
+  }
+
+  function checkO(element) {
+    return element[1] == "O";
+  }
 
   const playerSwitcher = () => {
     var twoPlayers = document.getElementById("two-player");
@@ -166,7 +231,12 @@ const gameFncs = (() => {
     reset,
     newGame,
     playerSwitcher,
-    gameType
+    gameType,
+    winningCombos,
+    objectify,
+    computerTurn,
+    checkTwoX,
+    randomTurn
   };
 })();
 
