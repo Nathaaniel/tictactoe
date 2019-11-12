@@ -20,9 +20,36 @@
         action="JavaScript:void(0)"
       >
         Player 1: <input type="text" name="player1" /><br />
-        Player 2: <input type="text" name="player2" /><br />
+        Player 2: <input type="text" name="player2" id="secondPlayer"/><br />
+
         <input type="submit" value="New Game" />
+
+        <div class="radio">
+          <input
+            type="radio"
+            id="two-player"
+            name="AIselector"
+            value="two-player"
+            onclick="gameFncs.playerSwitcher()"
+            class = "radio"
+            checked
+          />
+          <label style="display:block" for="two-player">Two Player</label>
+        </div>
+  
+        <div class="radio">
+          <input
+            type="radio"
+            id="one-player"
+            name="AIselector"
+            value="one-player"
+            class = "radio"
+            onclick="gameFncs.playerSwitcher()"
+          />
+          <label style="display:block" for="one-player">One Player</label>
+        </div>
       </form>
+
       <div class="two">
         <div id="player2" class="player"></div>
         <div class="symbol">O</div>
